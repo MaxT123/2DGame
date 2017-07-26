@@ -1,5 +1,5 @@
 /*
- * File: MyGame.js 
+ * File: Level1.js 
  * This is the logic of our game. 
  */
 

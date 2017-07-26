@@ -80,11 +80,11 @@ MyGame.prototype.initialize = function () {
     //mMsg    
     this.mMsg1 = new FontRenderable("I saw her standing there.");
     this.mMsg1.setFont(this.kFontCon72);
-    this._initText(this.mMsg1, 68, 107, [0.9, 0.9, 0.9, 1], 5);
+    this.initText(this.mMsg1, 68, 107, [0.9, 0.9, 0.9, 1], 5);
 
     this.mMsg2 = new FontRenderable("but then I was a zombie.");
     this.mMsg2.setFont(this.kFontCon72);
-    this._initText(this.mMsg2, 70, 100, [0.9, 0.9, 0.9, 1], 5);
+    this.initText(this.mMsg2, 70, 100, [0.9, 0.9, 0.9, 1], 5);
     
     // the floor and ceiling
     var i, rx, ry, obj;
@@ -108,10 +108,21 @@ MyGame.prototype.initialize = function () {
     
 };
 
-MyGame.prototype._initText = function (font, posX, posY, color, textH) {
+MyGame.prototype.initText = function (font, posX, posY, color, textH) {
     font.setColor(color);
     font.getXform().setPosition(posX, posY);
     font.setTextHeight(textH);
+};
+
+MyGame.prototype.physicsSimulation = function() {
+    
+    //platform
+    gEngine.Physics.processObjSet(this.mHero, this.mAllPlatforms);
+    gEngine.Physics.processObjSet(this.mActress, this.mAllPlatforms);    
+    gEngine.Physics.processSetSet(this.mAllHumans, this.mAllPlatforms);    
+    //humans
+    gEngine.Physics.processSetSet(this.mAllHumans, this.mAllHumans);
+
 };
 
 // This is the draw function, make sure to setup proper drawing environment, and more
@@ -131,8 +142,6 @@ MyGame.prototype.draw = function () {
     
     this.mMsg1.draw(this.mCamera);
     this.mMsg2.draw(this.mCamera);
-    
-//    this.mCollidedObj.draw(this.mCamera);
 };
 
 // The Update function, updates the application state. Make sure to _NOT_ draw
@@ -168,7 +177,7 @@ MyGame.prototype.update = function () {
     this.mMsg1.setColor(color1);    
     
     // physics simulation
-    this._physicsSimulation();
+    this.physicsSimulation();
         
     if (this.mGameStatus === 1) {
         this.nextLevel = new MyGame();
@@ -186,43 +195,11 @@ MyGame.prototype.update = function () {
     
 };
 
-MyGame.prototype.gameResultResponse = function() {
-    var status = this.mGameStatus;
-    if(status === 0) {
-        return;
-    } else if (status === 1) {
-        this.nextLevel = new MyGame();
-        gEngine.GameLoop.stop();
-    } else if (status === 2) {
-        this.nextLevel = new Level1();
-        gEngine.GameLoop.stop();
-    }
-};
-
 MyGame.prototype.gameResultDetecting = function () {
-    if(this.getHumanChaseResult() || this.getActressChaseResult()) {
+    if(this.mAllHumans.getHumanChaseResult() || this.mActress.getCatchHeroResult()) {
         this.mGameStatus = 1;
     }
-    if (this.getTouchCatherineResult()) {
+    if (this.mFlower.getTouchCatherineResult()) {
         this.mGameStatus = 2;
     }
-    //this.gameResultResponse();
-};
-
-MyGame.prototype.getHumanChaseResult = function() {
-    for (var i = 0; i < this.mAllHumans.size(); i++) {
-        var human = this.mAllHumans.getObjectAt(i);
-        if (human.getCatchHeroResult()) {
-            return true;
-        }
-    }
-    return false;
-};
-
-MyGame.prototype.getActressChaseResult = function() {
-    return this.mActress.getCatchHeroResult();
-};
-
-MyGame.prototype.getTouchCatherineResult = function() {
-    return this.mFlower.getTouchCatherineResult();
 };
