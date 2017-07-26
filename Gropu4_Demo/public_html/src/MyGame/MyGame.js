@@ -12,14 +12,8 @@
 "use strict";  // Operate in Strict mode such that variables must be declared before used!
 
 function MyGame() {
-    this.kMinionSprite = "assets/minion_sprite.png";
-//    this.kMinionSprite = "assets/Me.png";
-    
     this.kPlatformTexture = "assets/Ground.png";
     this.kWallTexture = "assets/wall.png";
-    this.kDyePackTexture = "assets/wall.png";
-    this.kParticleTexture = "assets/wall.png";
-    this.kPrompt = "RigidBody Physics!";
     this.kHeroSprite = "assets/Me.png";
     this.kCatherine = "assets/Catherine.png";
     this.kHuman = "assets/Human.png";
@@ -29,7 +23,6 @@ function MyGame() {
     // The camera to view the scene
     this.mCamera = null;
 
-    this.mMsg = null;
     this.mMsg1 = null;
     this.mMsg2 = null;
 
@@ -38,28 +31,18 @@ function MyGame() {
     this.mActress = null;   
     this.mFlower = null;
     
-//    this.mGameStatus = new GameState();
-    this.mGameStatus = 0;
-    
-//    this.nextLevel = new Level1();
+    this.mGameStatus = 0;   
     this.nextLevel = null;
     
     this.mAllPlatforms = new GameObjectSet();
     this.mAllHumans = new GameObjectSet();
-    this.mCollidedObj = null;
     this.mAllWalls = new GameObjectSet();
-    this.mAllMinions = new GameObjectSet();
-    this.mAllDyePacks = new GameObjectSet();
-    this.mAllParticles = new ParticleGameObjectSet();
 }
 gEngine.Core.inheritPrototype(MyGame, Scene);
 
 MyGame.prototype.loadScene = function () {
-    gEngine.Textures.loadTexture(this.kMinionSprite);
     gEngine.Textures.loadTexture(this.kPlatformTexture);
     gEngine.Textures.loadTexture(this.kWallTexture);
-    gEngine.Textures.loadTexture(this.kDyePackTexture);
-    gEngine.Textures.loadTexture(this.kParticleTexture);
     gEngine.Textures.loadTexture(this.kHeroSprite);
     gEngine.Textures.loadTexture(this.kCatherine);
     gEngine.Textures.loadTexture(this.kHuman);
@@ -68,18 +51,14 @@ MyGame.prototype.loadScene = function () {
 };
 
 MyGame.prototype.unloadScene = function () {    
-    gEngine.Textures.unloadTexture(this.kMinionSprite);
     gEngine.Textures.unloadTexture(this.kPlatformTexture);
     gEngine.Textures.unloadTexture(this.kWallTexture);
-    gEngine.Textures.unloadTexture(this.kDyePackTexture);
-    gEngine.Textures.unloadTexture(this.kParticleTexture);
     gEngine.Textures.unloadTexture(this.kHeroSprite);
     gEngine.Textures.unloadTexture(this.kCatherine);
     gEngine.Textures.unloadTexture(this.kHuman);
     gEngine.Textures.unloadTexture(this.kFlower);
     gEngine.Fonts.unloadFont(this.kFontCon72);
     
-    //var nextLevel = new Level1();  // load the next level
     gEngine.Core.startScene(this.nextLevel);
 };
 
@@ -90,22 +69,15 @@ MyGame.prototype.initialize = function () {
         200,                         // width of camera
         [0, 0, 1280, 720]            // viewport (orgX, orgY, width, height)
     );
-    this.mCamera.setBackgroundColor([0.9, 0.9, 0.9, 1]);
-            // sets the background to gray
+    this.mCamera.setBackgroundColor([0.9, 0.9, 0.9, 1]); // sets the background to gray
     
-    gEngine.DefaultResources.setGlobalAmbientIntensity(3);
+    gEngine.DefaultResources.setGlobalAmbientIntensity(3); //control illumination
     
     this.mHero = new Hero(this.kHeroSprite, 20, 25);
-    this.mCollidedObj = new Platform(this.kPlatformTexture, 20, 10, this.mHero);
     this.mFlower = new Flower(this.kFlower, 100, 8);
     this.mActress = new Catherine(this.kCatherine, 180, 25);
     
-    //mMsg
-    this.mMsg = new FontRenderable(this.kPrompt);
-    this.mMsg.setColor([0, 0, 0, 1]);
-    this.mMsg.getXform().setPosition(10, 110);
-    this.mMsg.setTextHeight(3);
-    
+    //mMsg    
     this.mMsg1 = new FontRenderable("I saw her standing there.");
     this.mMsg1.setFont(this.kFontCon72);
     this._initText(this.mMsg1, 68, 107, [0.9, 0.9, 0.9, 1], 5);
@@ -114,18 +86,12 @@ MyGame.prototype.initialize = function () {
     this.mMsg2.setFont(this.kFontCon72);
     this._initText(this.mMsg2, 70, 100, [0.9, 0.9, 0.9, 1], 5);
     
-    
-    // create a few objects ...
-    var i, j, rx, ry, obj, dy, dx;
-    
     // the floor and ceiling
+    var i, rx, ry, obj;
     rx = -15;
     for (i = 0; i<9; i++) {
-        obj = new Platform(this.kPlatformTexture, rx, 2, this.mHero);
+        obj = new Platform(this.kPlatformTexture, rx, 2);
         this.mAllPlatforms.addToSet(obj);
-        
-//        obj = new Platform(this.kPlatformTexture, rx, 112, this.mHero);
-//        this.mAllPlatforms.addToSet(obj);
         rx += 30;
     }
     
@@ -139,10 +105,6 @@ MyGame.prototype.initialize = function () {
         this.mAllPlatforms.addToSet(obj);
         ry += 16;
     }
-    
-    // 
-    // the important objects
-//    this.mHero = new Hero(this.kMinionSprite, 20, 30);
     
 };
 
@@ -167,8 +129,6 @@ MyGame.prototype.draw = function () {
     this.mActress.draw(this.mCamera);
     this.mFlower.draw(this.mCamera);
     
-    this.mAllParticles.draw(this.mCamera);
-    this.mMsg.draw(this.mCamera);
     this.mMsg1.draw(this.mCamera);
     this.mMsg2.draw(this.mCamera);
     
@@ -179,16 +139,14 @@ MyGame.prototype.draw = function () {
 // anything from this function!
 MyGame.prototype.update = function () {
     
-    this.gameResultDetecting();
-    
-    var func = function(x, y) { this.createParticle.call(this, x, y); };
+    this.gameResultDetecting(); // win/lose/
     
     this.mCamera.update();  // to ensure proper interpolated movement effects    
     this.mAllWalls.update();    
     this.mAllPlatforms.update();
     
     if (this.mGameStatus === 0) {
-        this.mHero.update(this.mAllDyePacks, this.mAllPlatforms, this.mAllParticles, this.createParticle);
+        this.mHero.update(this.mAllPlatforms);
         this.mActress.update();
         this.mAllHumans.update();
         this.mFlower.update(this.mActress.getXform().getPosition());
@@ -203,15 +161,8 @@ MyGame.prototype.update = function () {
             this.mAllHumans.getObjectAt(i).chaseHero(this.mHero, 40, 0.3);
         }
     }
-/*    
-        this.mMsg.setText("heroPos: (" + this.mHero.getXform().getXPos().toFixed(2) + ", " + 
-            this.mHero.getXform().getYPos().toFixed(2) + ")"
-            + " isTouched: " + this.mHero.isGrounded
-            + " Status: " + this.mGameStatus);
-*/    
-    //mMsg
-    var delta = 0.01;
     
+    var delta = 0.01;    
     var color1 = this.mMsg1.getColor();
     color1[3] -= delta;
     this.mMsg1.setColor(color1);    
@@ -242,11 +193,9 @@ MyGame.prototype.gameResultResponse = function() {
     } else if (status === 1) {
         this.nextLevel = new MyGame();
         gEngine.GameLoop.stop();
-        //alert("Lose");
     } else if (status === 2) {
         this.nextLevel = new Level1();
         gEngine.GameLoop.stop();
-        //alert("Win");
     }
 };
 

@@ -9,9 +9,8 @@
 
 "use strict";  // Operate in Strict mode such that variables must be declared before used!
 
-function Platform(texture, atX, atY, collider) {
+function Platform(texture, atX, atY) {
     this.mPlatform = new TextureRenderable(texture);
-    this.mHero = collider;
 //    alert(this.mHero);
     this.mPlatform.setColor([1, 1, 1, 0]);
     this.mPlatform.getXform().setPosition(atX, atY);
