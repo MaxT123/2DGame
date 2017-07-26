@@ -11,6 +11,7 @@
 
 "use strict";  // Operate in Strict mode such that variables must be declared before used!
 
+//  THIS IS MY GAME!!
 function MyGame() {
     this.kMinionSprite = "assets/minion_sprite.png";
 //    this.kMinionSprite = "assets/Me.png";
