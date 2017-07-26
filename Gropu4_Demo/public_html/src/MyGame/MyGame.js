@@ -96,7 +96,7 @@ MyGame.prototype.initialize = function () {
     gEngine.DefaultResources.setGlobalAmbientIntensity(3);
     
     this.mHero = new Hero(this.kHeroSprite, 20, 25);
-    this.mCollidedObj = new Platform(this.kPlatformTexture, 20, 10, this.mHero);
+    //this.mCollidedObj = new Platform(this.kPlatformTexture, 20, 10, this.mHero);
     this.mFlower = new Flower(this.kFlower, 100, 8);
     this.mActress = new Catherine(this.kCatherine, 180, 25);
     
@@ -118,16 +118,8 @@ MyGame.prototype.initialize = function () {
     // create a few objects ...
     var i, j, rx, ry, obj, dy, dx;
     
-    // the floor and ceiling
-    rx = -15;
-    for (i = 0; i<9; i++) {
-        obj = new Platform(this.kPlatformTexture, rx, 2, this.mHero);
-        this.mAllPlatforms.addToSet(obj);
-        
-//        obj = new Platform(this.kPlatformTexture, rx, 112, this.mHero);
-//        this.mAllPlatforms.addToSet(obj);
-        rx += 30;
-    }
+    var ground = new Platform(this.kPlatformTexture, 100, 3, 200, 3, this.mHero);
+    this.mAllPlatforms.addToSet(ground);
     
     // the left and right walls
     ry = 12;
