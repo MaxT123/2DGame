@@ -168,7 +168,6 @@ MyGame.prototype.draw = function () {
     this.mFlower.draw(this.mCamera);
     
     this.mAllParticles.draw(this.mCamera);
-    this.mMsg.draw(this.mCamera);
     this.mMsg1.draw(this.mCamera);
     this.mMsg2.draw(this.mCamera);
     
@@ -188,7 +187,7 @@ MyGame.prototype.update = function () {
     this.mAllPlatforms.update();
     
     if (this.mGameStatus === 0) {
-        this.mHero.update(this.mAllDyePacks, this.mAllPlatforms, this.mAllParticles, this.createParticle);
+        this.mHero.update(this.mAllPlatforms);
         this.mActress.update();
         this.mAllHumans.update();
         this.mFlower.update(this.mActress.getXform().getPosition());
@@ -203,15 +202,8 @@ MyGame.prototype.update = function () {
             this.mAllHumans.getObjectAt(i).chaseHero(this.mHero, 40, 0.3);
         }
     }
-/*    
-        this.mMsg.setText("heroPos: (" + this.mHero.getXform().getXPos().toFixed(2) + ", " + 
-            this.mHero.getXform().getYPos().toFixed(2) + ")"
-            + " isTouched: " + this.mHero.isGrounded
-            + " Status: " + this.mGameStatus);
-*/    
-    //mMsg
-    var delta = 0.01;
     
+    var delta = 0.01;    
     var color1 = this.mMsg1.getColor();
     color1[3] -= delta;
     this.mMsg1.setColor(color1);    

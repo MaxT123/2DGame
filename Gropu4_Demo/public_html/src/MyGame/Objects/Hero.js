@@ -37,7 +37,7 @@ function Hero(spriteTexture, atX, atY) {
 }
 gEngine.Core.inheritPrototype(Hero, GameObject);
 
-Hero.prototype.update = function (dyePacks, platforms, allParticles, func) {
+Hero.prototype.update = function (platforms) {
     // must call super class update
     GameObject.prototype.update.call(this);
 
