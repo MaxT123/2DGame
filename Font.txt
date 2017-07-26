@@ -1,0 +1,31 @@
+    this.mMsg1 = null;
+    this.mMsg2 = null;
+//
+
+    this.mMsg1 = new FontRenderable("i saw her standing there.");
+    this.mMsg1.setColor([0.7, 0.7, 0.7, 1]);
+    this.mMsg1.getXform().setPosition(68, 107);
+    this.mMsg1.setTextHeight(5);
+    
+    this.mMsg2 = new FontRenderable("but then I was a zombie.");
+    this.mMsg2.setColor([0.7, 0.7, 0.7, 1]);
+    this.mMsg2.getXform().setPosition(70, 100);
+    this.mMsg2.setTextHeight(5);
+//
+
+    this.mMsg1.draw(this.mCamera);
+    this.mMsg2.draw(this.mCamera);
+//
+//第一段 直接显示
+//第二段 本关通过后，延迟触发
+    var delta = 0.01;
+    
+    var color1 = this.mMsg1.getColor();
+    color1[3] -= delta;
+    this.mMsg1.setColor(color1);
+    
+    var color2 = this.mMsg2.getColor();
+    color2[3] -= delta;
+    this.mMsg2.setColor(color2);
+
+// 修改level1的GameState
