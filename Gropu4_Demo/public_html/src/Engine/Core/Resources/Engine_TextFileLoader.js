@@ -16,7 +16,8 @@ var gEngine = gEngine || { };
 gEngine.TextFileLoader = (function () {
     var eTextFileType = Object.freeze({
         eXMLFile: 0,
-        eTextFile: 1
+        eTextFile: 1,
+        eJsonFile: 2
     });
 
     // if fileType is a eTextFileType
@@ -41,6 +42,8 @@ gEngine.TextFileLoader = (function () {
                 if (fileType === eTextFileType.eXMLFile) {
                     var parser = new DOMParser();
                     fileContent = parser.parseFromString(req.responseText, "text/xml");
+                } else if (fileType === eTextFileType.eJsonFile) {
+                    fileContent = JSON.parse(req.responseText);
                 } else {
                     fileContent = req.responseText;
                 }

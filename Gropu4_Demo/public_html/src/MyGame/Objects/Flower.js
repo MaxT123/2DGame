@@ -9,12 +9,12 @@
 
 "use strict";  // Operate in Strict mode such that variables must be declared before used!
 
-function Flower(texture, atX, atY) {
+function Flower(texture, atX, atY, width, height) {
     this.mFlower = new TextureRenderable(texture);
 
     this.mFlower.setColor([1, 1, 1, 0]);
     this.mFlower.getXform().setPosition(atX, atY);
-    this.mFlower.getXform().setSize(8, 8);
+    this.mFlower.getXform().setSize(width, height);
     
     this.ifTouchCatherine = false;
                                 // show each element for mAnimSpeed updates

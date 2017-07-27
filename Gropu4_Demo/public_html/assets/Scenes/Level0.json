@@ -1,0 +1,85 @@
+{
+    "Camera": [
+        {
+            "Center": [100, 56.25],
+            "Width": 200,
+            "Viewport": [0, 0, 1280, 720],
+            "BgColor": [0.9, 0.9, 0.9, 1.0]
+        }
+    ],
+    
+    "Hero": {
+        "Position": [20, 25],
+        "Scale": [4, 10],
+        "MoveSpeed": 45,
+        "JumpSpeed": 75
+    },
+    
+    "Catherine": {
+        "Position": [180, 10],
+        "Scale": [4, 10],
+        "Speed": 0.5,
+        "TriggerDistance": 50
+    },
+    
+    "HumansBackup": [
+        {
+        "Position": [100, 10],
+        "Scale": [4, 10],
+        "Speed": 0.3,
+        "TriggerDistance": 60
+        },
+        {
+        "Position": [120, 10],
+        "Scale": [4, 10],
+        "Speed": 0.3,
+        "TriggerDistance": 60
+        }
+    ],
+    
+    "Humans" :[
+    ],
+    
+    "Flower": {
+        "Position": [100, 8],
+        "Scale": [8, 8]
+    },
+    
+    "Platforms": [
+        {
+            "Position": [100, 3],
+            "Scale": [200, 3]
+        }
+    ],
+    
+    "Walls": [
+        {
+            "Position": [5, 59],
+            "Scale": [0.5, 100]
+        },
+        {
+            "Position": [195, 59],
+            "Scale": [0.5, 100]
+        }
+    ],
+    
+    "Texts": [
+        {
+            "Content": "I saw her standing there.",
+            "Position": [68, 107],
+            "Color": [0.9, 0.9, 0.9, 1.0],
+            "Height": 5
+        },
+        
+        {
+            "Content": "but then I was a zombie",
+            "Position": [70, 100],
+            "Color": [0.9, 0.9, 0.9, 1.0],
+            "Height": 5
+        }
+    ],
+    
+    "GameStatus": {
+        "DefaultStatus": 0
+    }
+}

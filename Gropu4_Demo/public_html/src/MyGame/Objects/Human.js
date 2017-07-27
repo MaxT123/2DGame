@@ -13,7 +13,7 @@
 
 /* global GameObject, gEngine, Catherine */
 
-function Human(spriteTexture, xPos, yPos) {
-    Catherine.call(this, spriteTexture, xPos, yPos);
+function Human(spriteTexture, xPos, yPos, width, height, chaseSpeed, triggerDis) {
+    Catherine.call(this, spriteTexture, xPos, yPos, width, height, chaseSpeed, triggerDis);
 }
 gEngine.Core.inheritPrototype(Human, Catherine);
