@@ -74,10 +74,10 @@ MyGame.prototype.initialize = function () {
     gEngine.DefaultResources.setGlobalAmbientIntensity(3); //control illumination
     
     this.mHero = new Hero(this.kHeroSprite, 20, 25);
-<<<<<<< HEAD
-=======
+
+
     //this.mCollidedObj = new Platform(this.kPlatformTexture, 20, 10, this.mHero);
->>>>>>> b3b316425c805377ee207fd0e3f319334f625752
+
     this.mFlower = new Flower(this.kFlower, 100, 8);
     this.mActress = new Catherine(this.kCatherine, 180, 25);
     
@@ -90,7 +90,7 @@ MyGame.prototype.initialize = function () {
     this.mMsg2.setFont(this.kFontCon72);
     this._initText(this.mMsg2, 70, 100, [0.9, 0.9, 0.9, 1], 5);
     
-<<<<<<< HEAD
+
     // the floor and ceiling
     var i, rx, ry, obj;
     rx = -15;
@@ -99,14 +99,14 @@ MyGame.prototype.initialize = function () {
         this.mAllPlatforms.addToSet(obj);
         rx += 30;
     }
-=======
+
     
     // create a few objects ...
     var i, j, rx, ry, obj, dy, dx;
     
     var ground = new Platform(this.kPlatformTexture, 100, 3, 200, 3, this.mHero);
     this.mAllPlatforms.addToSet(ground);
->>>>>>> b3b316425c805377ee207fd0e3f319334f625752
+
     
     // the left and right walls
     ry = 12;
