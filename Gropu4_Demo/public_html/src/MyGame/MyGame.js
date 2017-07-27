@@ -83,10 +83,6 @@ MyGame.prototype.initialize = function () {
     //gerenate map : loadMap();
     //character
     this.mHero = new Hero(this.kHeroSprite, 20, 25);
-<<<<<<< HEAD
-=======
-    //this.mCollidedObj = new Platform(this.kPlatformTexture, 20, 10, this.mHero);
->>>>>>> b3b316425c805377ee207fd0e3f319334f625752
     this.mFlower = new Flower(this.kFlower, 100, 8);
     this.mActress = new Catherine(this.kCatherine, 180, 25);    
     //Msg    
@@ -95,13 +91,7 @@ MyGame.prototype.initialize = function () {
     this.initText(this.mMsg1, 68, 107, [0.9, 0.9, 0.9, 1], 5);
     this.mMsg2 = new FontRenderable("but then I was a zombie.");
     this.mMsg2.setFont(this.kFontCon72);
-<<<<<<< HEAD
-    this._initText(this.mMsg2, 70, 100, [0.9, 0.9, 0.9, 1], 5);
-    
-<<<<<<< HEAD
-=======
     this.initText(this.mMsg2, 70, 100, [0.9, 0.9, 0.9, 1], 5);    
->>>>>>> wyh
     // the floor and ceiling
     var i, rx, ry, obj;
     rx = -15;
@@ -109,20 +99,7 @@ MyGame.prototype.initialize = function () {
         obj = new Platform(this.kPlatformTexture, rx, 2);
         this.mAllPlatforms.addToSet(obj);
         rx += 30;
-<<<<<<< HEAD
-    }
-=======
-    
-    // create a few objects ...
-    var i, j, rx, ry, obj, dy, dx;
-    
-    var ground = new Platform(this.kPlatformTexture, 100, 3, 200, 3, this.mHero);
-    this.mAllPlatforms.addToSet(ground);
->>>>>>> b3b316425c805377ee207fd0e3f319334f625752
-    
-=======
     } 
->>>>>>> wyh
     // the left and right walls
     ry = 12;
     for (i = 0; i<8; i++) {
