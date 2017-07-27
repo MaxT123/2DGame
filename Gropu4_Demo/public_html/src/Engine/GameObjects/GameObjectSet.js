@@ -43,3 +43,10 @@ GameObjectSet.prototype.draw = function (aCamera) {
         this.mSet[i].draw(aCamera);
     }
 };
+
+GameObjectSet.prototype.getHumanChaseResult = function() {
+    for (var i = 0; i < this.mSet.length; i++)
+        if (this.mSet[i].getCatchHeroResult())
+            return true;
+    return false;
+};

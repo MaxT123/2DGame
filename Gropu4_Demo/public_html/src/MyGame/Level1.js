@@ -1,5 +1,5 @@
 /*
- * File: MyGame.js 
+ * File: Level1.js 
  * This is the logic of our game. 
  */
 
@@ -200,7 +200,7 @@ Level1.prototype.update = function () {
         }
     }
     if (gEngine.Input.isKeyClicked(gEngine.Input.keys.Q)){
-        this.nextLevel = new MyGame();
+        this.nextLevel = new Level2();
         gEngine.GameLoop.stop();
     }
         
