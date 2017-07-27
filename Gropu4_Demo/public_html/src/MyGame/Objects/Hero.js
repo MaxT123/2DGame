@@ -11,21 +11,21 @@
 
 "use strict";  // Operate in Strict mode such that variables must be declared before used!
 
-function Hero(spriteTexture, atX, atY) {
+function Hero(spriteTexture, atX, atY, width, height, moveSpeed, jumpSpeed) {
     this.kXDelta = 1;
     this.kYDelta = 2.0;
     
-    this.moveSpeed = 45;
+    this.moveSpeed = moveSpeed;
     this.moveSpeed_Max;
     this.moveSpeed_Min;
     
-    this.jumpSpeed = 75;
+    this.jumpSpeed = jumpSpeed;
     this.isGrounded = false;
     
     this.mDye = new SpriteRenderable(spriteTexture);
     this.mDye.setColor([1, 1, 1, 0]);
     this.mDye.getXform().setPosition(atX, atY);
-    this.mDye.getXform().setSize(4, 10);
+    this.mDye.getXform().setSize(width, height);
     this.mDye.setElementPixelPositions(0, this.mDye.getTextureWidth(), 0, this.mDye.getTextureHeight());
     GameObject.call(this, this.mDye);
     var r = new RigidRectangle(this.getXform(), this.mDye.getXform().getWidth(), this.mDye.getXform().getHeight());
@@ -80,4 +80,8 @@ Hero.prototype.update = function (dyePacks, platforms, allParticles, func) {
                 this.isGrounded = false;
         }
     }
+};
+
+Hero.prototype.getRenderableObj = function () {
+    return this.mDye;
 };
