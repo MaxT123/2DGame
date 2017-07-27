@@ -31,7 +31,7 @@ function MyGame() {
     this.mActress = null;   
     this.mFlower = null;
     
-    this.mGameStatus = 0;   
+    this.mGameStatus = null;   
     this.nextLevel = null;
     
     this.mAllPlatforms = new GameObjectSet();
@@ -62,7 +62,8 @@ MyGame.prototype.unloadScene = function () {
     gEngine.Core.startScene(this.nextLevel);
 };
 
-MyGame.prototype.initialize = function () {
+MyGame.prototype.initialize0 = function () {
+    this.mGameStatus = 0;
     // Step A: set up the cameras
     this.mCamera = new Camera(
         vec2.fromValues(100, 56.25), // position of the camera
@@ -73,19 +74,24 @@ MyGame.prototype.initialize = function () {
     
     gEngine.DefaultResources.setGlobalAmbientIntensity(3); //control illumination
     
+};
+
+MyGame.prototype.initialize = function () {
+    //initialize gamestatus, camera, illumination
+    this.initialize0();
+    this.nextLevel = new Level1();
+    //gerenate map : loadMap();
+    //character
     this.mHero = new Hero(this.kHeroSprite, 20, 25);
     this.mFlower = new Flower(this.kFlower, 100, 8);
-    this.mActress = new Catherine(this.kCatherine, 180, 25);
-    
-    //mMsg    
+    this.mActress = new Catherine(this.kCatherine, 180, 25);    
+    //Msg    
     this.mMsg1 = new FontRenderable("I saw her standing there.");
     this.mMsg1.setFont(this.kFontCon72);
     this.initText(this.mMsg1, 68, 107, [0.9, 0.9, 0.9, 1], 5);
-
     this.mMsg2 = new FontRenderable("but then I was a zombie.");
     this.mMsg2.setFont(this.kFontCon72);
-    this.initText(this.mMsg2, 70, 100, [0.9, 0.9, 0.9, 1], 5);
-    
+    this.initText(this.mMsg2, 70, 100, [0.9, 0.9, 0.9, 1], 5);    
     // the floor and ceiling
     var i, rx, ry, obj;
     rx = -15;
@@ -93,8 +99,7 @@ MyGame.prototype.initialize = function () {
         obj = new Platform(this.kPlatformTexture, rx, 2);
         this.mAllPlatforms.addToSet(obj);
         rx += 30;
-    }
-    
+    } 
     // the left and right walls
     ry = 12;
     for (i = 0; i<8; i++) {
@@ -104,8 +109,7 @@ MyGame.prototype.initialize = function () {
         obj = new Wall(this.kWallTexture, 195, ry);
         this.mAllPlatforms.addToSet(obj);
         ry += 16;
-    }
-    
+    }       
 };
 
 MyGame.prototype.initText = function (font, posX, posY, color, textH) {
@@ -161,7 +165,6 @@ MyGame.prototype.update = function () {
         this.mFlower.update(this.mActress.getXform().getPosition());
     
         if (gEngine.Input.isKeyClicked(gEngine.Input.keys.Q)){
-            this.nextLevel = new Level1();
             gEngine.GameLoop.stop();
         }   
     
