@@ -43,9 +43,18 @@ Hero.prototype.update = function (platforms) {
 
     // control by WASD
     var v = this.getPhysicsComponent().getVelocity();
+    
     if (gEngine.Input.isKeyClicked(gEngine.Input.keys.Up) && this.isGrounded) {
         v[1] = this.jumpSpeed;
     }
+    
+   //   debug
+   /*
+    if (gEngine.Input.isKeyClicked(gEngine.Input.keys.Up)) {
+        v[1] = this.jumpSpeed;
+    }
+    */
+    
     if(gEngine.Input.isKeyPressed(gEngine.Input.keys.Left) || gEngine.Input.isKeyPressed(gEngine.Input.keys.Right)) {
         if (gEngine.Input.isKeyPressed(gEngine.Input.keys.Left)) {
             v[0] = -1 * this.moveSpeed;
@@ -70,10 +79,11 @@ Hero.prototype.update = function (platforms) {
     
     for(var i = 0; i < platforms.size(); i++){
         var platform = platforms.getObjectAt(i);
-        var yDis = this.getXform().getYPos() - platform.getXform().getYPos();
+        var yDis = (this.getXform().getYPos() - this.getXform().getHeight() / 2) 
+                - (platform.getXform().getYPos() + platform.getXform().getHeight() / 2);
         var xDis = this.getXform().getXPos() - platform.getXform().getXPos();
         if(Math.abs(xDis) <= platform.getXform().getWidth() / 2)
-            if(yDis > 0 && yDis <= 6.5) {
+            if(yDis >= -0.5 && yDis <= 0.5) {
                 this.isGrounded = true;
                 break;
             } else {

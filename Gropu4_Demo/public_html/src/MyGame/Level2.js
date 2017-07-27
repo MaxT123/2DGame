@@ -12,6 +12,7 @@
 "use strict";  // Operate in Strict mode such that variables must be declared before used!
 
 function Level2() {    
+<<<<<<< HEAD
     this.mAllPlatforms = new GameObjectSet();
     this.mAllHumans = new GameObjectSet();
     this.mAllWalls = new GameObjectSet();
@@ -54,5 +55,15 @@ Level2.prototype.initialize = function () {
         this.mAllPlatforms.addToSet(obj);
         ry += 16;
     }          
+=======
+    this.sceneFile = "assets/Scenes/Level2.json";    
+}
+gEngine.Core.inheritPrototype(Level2, MyGame);
+
+Level2.prototype.initialize0 = function () {
+    this.thisLevel = new Level2();
+    this.nextLevel = new MyGame(); 
+    this.sceneParser = new SceneFileParser(this.sceneFile);    
+>>>>>>> master
 };
 

@@ -11,6 +11,7 @@
 
 "use strict";  // Operate in Strict mode such that variables must be declared before used!
 
+<<<<<<< HEAD
 function Level1() {
     this.kMinionSprite = "assets/minion_sprite.png";
 //    this.kMinionSprite = "assets/Me.png";
@@ -270,7 +271,15 @@ Level1.prototype.getHumanChaseResult = function() {
 Level1.prototype.getActressChaseResult = function() {
     return this.mCatherine.getCatchHeroResult();
 };
+=======
+function Level1() {    
+    this.sceneFile = "assets/Scenes/Level1.json";    
+}
+gEngine.Core.inheritPrototype(Level1, MyGame);
+>>>>>>> master
 
-Level1.prototype.getTouchCatherineResult = function() {
-    return this.mFlower.getTouchCatherineResult();
+Level1.prototype.initialize0 = function () {
+    this.thisLevel = new Level2();
+    this.nextLevel = new MyGame(); 
+    this.sceneParser = new SceneFileParser(this.sceneFile);    
 };

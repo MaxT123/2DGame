@@ -48,3 +48,7 @@ Catherine.prototype.update = function() {
 Catherine.prototype.getCatchHeroResult = function() {
     return this.ifCatchHero;
 };
+
+Catherine.prototype.getFallingResult = function() {
+    return this.getXform().getYPos() < 0;
+};
