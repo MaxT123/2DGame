@@ -57,13 +57,17 @@ SceneFileParser.prototype.getWalls = function (walls) {
     return walls;
 };
 SceneFileParser.prototype.getTexts = function (texts) {
+    if(this.mScene.Texts.length === 0) {
+        return null;
+    }
+    
     for(var i = 0; i < this.mScene.Texts.length; i++) {
         var textAttr = [];
         var textContent = this.mScene.Texts[i].Content;
         var textPos = this.mScene.Texts[i].Position;
         var textColor = this.mScene.Texts[i].Color;
         var textHeight = this.mScene.Texts[i].Height;
-        
+
         textAttr = [textContent, textPos[0], textPos[1], textColor, textHeight];
         texts.push(textAttr);
     }
