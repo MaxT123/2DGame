@@ -12,13 +12,13 @@
 "use strict";  // Operate in Strict mode such that variables must be declared before used!
 
 function MyGame() {
-    this.kPlatformTexture = "assets/Ground.png";
-    this.kWallTexture = "assets/wall.png";
-    this.kHeroSprite = "assets/Me.png";
-    this.kCatherine = "assets/Catherine.png";
-    this.kHuman = "assets/Human.png";
-    this.kFlower = "assets/flower.png";
-    this.kFontCon72 = "assets/fonts/Consolas-72";
+    this.kPlatformTexture = null;
+    this.kWallTexture = null;
+    this.kHeroSprite = null;
+    this.kCatherine = null;
+    this.kHuman = null;
+    this.kFlower = null;
+    this.kFontCon72 = null;
 
     // The camera to view the scene
     this.mCamera = null;
@@ -28,7 +28,7 @@ function MyGame() {
 
     // the hero and the support objects
     this.mHero = null;
-    this.mActress = null;   
+    this.mCatherine = null;   
     this.mFlower = null;
     
     this.mGameStatus = null;   
@@ -41,6 +41,14 @@ function MyGame() {
 gEngine.Core.inheritPrototype(MyGame, Scene);
 
 MyGame.prototype.loadScene = function () {
+    this.kPlatformTexture = "assets/Ground.png";
+    this.kWallTexture = "assets/wall.png";
+    this.kHeroSprite = "assets/Me.png";
+    this.kCatherine = "assets/Catherine.png";
+    this.kHuman = "assets/Human.png";
+    this.kFlower = "assets/flower.png";
+    this.kFontCon72 = "assets/fonts/Consolas-72";
+    
     gEngine.Textures.loadTexture(this.kPlatformTexture);
     gEngine.Textures.loadTexture(this.kWallTexture);
     gEngine.Textures.loadTexture(this.kHeroSprite);
@@ -50,7 +58,8 @@ MyGame.prototype.loadScene = function () {
     gEngine.Fonts.loadFont(this.kFontCon72);
 };
 
-MyGame.prototype.unloadScene = function () {    
+MyGame.prototype.unloadScene = function () { 
+    /*
     gEngine.Textures.unloadTexture(this.kPlatformTexture);
     gEngine.Textures.unloadTexture(this.kWallTexture);
     gEngine.Textures.unloadTexture(this.kHeroSprite);
@@ -58,6 +67,7 @@ MyGame.prototype.unloadScene = function () {
     gEngine.Textures.unloadTexture(this.kHuman);
     gEngine.Textures.unloadTexture(this.kFlower);
     gEngine.Fonts.unloadFont(this.kFontCon72);
+    */
     
     gEngine.Core.startScene(this.nextLevel);
 };
@@ -84,7 +94,7 @@ MyGame.prototype.initialize = function () {
     //character
     this.mHero = new Hero(this.kHeroSprite, 20, 25);
     this.mFlower = new Flower(this.kFlower, 100, 8);
-    this.mActress = new Catherine(this.kCatherine, 180, 25);    
+    this.mCatherine = new Catherine(this.kCatherine, 180, 25);    
     //Msg    
     this.mMsg1 = new FontRenderable("I saw her standing there.");
     this.mMsg1.setFont(this.kFontCon72);
@@ -122,7 +132,7 @@ MyGame.prototype.physicsSimulation = function() {
     
     //platform
     gEngine.Physics.processObjSet(this.mHero, this.mAllPlatforms);
-    gEngine.Physics.processObjSet(this.mActress, this.mAllPlatforms);    
+    gEngine.Physics.processObjSet(this.mCatherine, this.mAllPlatforms);    
     gEngine.Physics.processSetSet(this.mAllHumans, this.mAllPlatforms);    
     //humans
     gEngine.Physics.processSetSet(this.mAllHumans, this.mAllHumans);
@@ -141,7 +151,7 @@ MyGame.prototype.draw = function () {
     this.mAllHumans.draw(this.mCamera);
     
     this.mHero.draw(this.mCamera);
-    this.mActress.draw(this.mCamera);
+    this.mCatherine.draw(this.mCamera);
     this.mFlower.draw(this.mCamera);
     
     this.mMsg1.draw(this.mCamera);
@@ -160,15 +170,15 @@ MyGame.prototype.update = function () {
     
     if (this.mGameStatus === 0) {
         this.mHero.update(this.mAllPlatforms);
-        this.mActress.update();
+        this.mCatherine.update();
         this.mAllHumans.update();
-        this.mFlower.update(this.mActress.getXform().getPosition());
+        this.mFlower.update(this.mCatherine.getXform().getPosition());
     
         if (gEngine.Input.isKeyClicked(gEngine.Input.keys.Q)){
             gEngine.GameLoop.stop();
         }   
     
-        this.mActress.chaseHero(this.mHero, 40, 0.5);
+        this.mCatherine.chaseHero(this.mHero, 40, 0.5);
         for(var i = 0; i < this.mAllHumans.size(); i++) {
             this.mAllHumans.getObjectAt(i).chaseHero(this.mHero, 40, 0.3);
         }
@@ -191,7 +201,6 @@ MyGame.prototype.update = function () {
         color2[3] -= delta;
         this.mMsg2.setColor(color2);
         if (color2[3] < -1){
-            this.nextLevel = new Level1();
             gEngine.GameLoop.stop();
         }
     }
@@ -199,7 +208,7 @@ MyGame.prototype.update = function () {
 };
 
 MyGame.prototype.gameResultDetecting = function () {
-    if(this.mAllHumans.getHumanChaseResult() || this.mActress.getCatchHeroResult()) {
+    if(this.mAllHumans.getHumanChaseResult() || this.mCatherine.getCatchHeroResult()) {
         this.mGameStatus = 1;
     }
     if (this.mFlower.getTouchCatherineResult()) {

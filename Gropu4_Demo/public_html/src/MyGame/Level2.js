@@ -11,18 +11,7 @@
 
 "use strict";  // Operate in Strict mode such that variables must be declared before used!
 
-function Level2() {
-    
-    this.kPlatformTexture = "assets/Ground.png";
-    this.kWallTexture = "assets/wall.png";
-    this.kHeroSprite = "assets/Me.png";
-    this.kCatherine = "assets/Catherine.png";
-    this.kHuman = "assets/Human.png";
-    this.kFlower = "assets/flower.png";
-    this.kFontCon72 = "assets/fonts/Consolas-72";  
-    
-   
-    
+function Level2() {    
     this.mAllPlatforms = new GameObjectSet();
     this.mAllHumans = new GameObjectSet();
     this.mAllWalls = new GameObjectSet();
@@ -31,14 +20,13 @@ gEngine.Core.inheritPrototype(Level2, MyGame);
 
 Level2.prototype.initialize = function () {
     //initialize gamestatus, camera, illumination
-    alert(this.kFlower);
     this.initialize0();
     this.nextLevel = new MyGame();
     //gerenate map : loadMap();
     //character
     this.mHero = new Hero(this.kHeroSprite, 20, 25);
     this.mFlower = new Flower(this.kFlower, 100, 8);
-    this.mActress = new Catherine(this.kCatherine, 180, 25);   
+    this.mCatherine = new Catherine(this.kCatherine, 180, 25);   
     var human = new Human(this.kHuman, 100, 25);
     this.mAllHumans.addToSet(human);
     //Msg    

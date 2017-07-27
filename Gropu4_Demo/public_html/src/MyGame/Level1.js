@@ -32,7 +32,7 @@ function Level1() {
 
     // the hero and the support objects
     this.mHero = null;
-    this.mActress = null;
+    this.mCatherine = null;
     this.mFlower = null;
     
     //this.mGameStatus = new GameState();
@@ -61,7 +61,8 @@ Level1.prototype.loadScene = function () {
     gEngine.Textures.loadTexture(this.kFlower);
 };
 
-Level1.prototype.unloadScene = function () {    
+Level1.prototype.unloadScene = function () {   
+    /*
     gEngine.Textures.unloadTexture(this.kMinionSprite);
     gEngine.Textures.unloadTexture(this.kPlatformTexture);
     gEngine.Textures.unloadTexture(this.kWallTexture);
@@ -71,6 +72,7 @@ Level1.prototype.unloadScene = function () {
     gEngine.Textures.unloadTexture(this.kCatherine);
     gEngine.Textures.unloadTexture(this.kHuman);
     gEngine.Textures.unloadTexture(this.kFlower);
+    */
     
      // load the next level
     gEngine.Core.startScene(this.nextLevel);
@@ -92,7 +94,7 @@ Level1.prototype.initialize = function () {
     this.mCollidedObj = new Platform(this.kPlatformTexture, 20, 10, this.mHero);
 //    this.mAllWalls.addToSet(this.mCollidedObj);
     
-    this.mActress = new Catherine(this.kCatherine, 180, 98);
+    this.mCatherine = new Catherine(this.kCatherine, 180, 98);
     var human = new Human(this.kHuman, 20, 70);
     this.mAllHumans.addToSet(human);
     this.mFlower = new Flower(this.kFlower, 100, 8);
@@ -168,7 +170,7 @@ Level1.prototype.draw = function () {
 
     this.mAllHumans.draw(this.mCamera);    
     this.mHero.draw(this.mCamera);
-    this.mActress.draw(this.mCamera);
+    this.mCatherine.draw(this.mCamera);
     
     this.mMsg.draw(this.mCamera);
 };
@@ -187,10 +189,10 @@ Level1.prototype.update = function () {
     //this.mAllParticles.update();
     
     this.mAllPlatforms.update();
-    this.mHero.update(this.mAllDyePacks, this.mAllPlatforms, this.mAllParticles, this.createParticle);
-    this.mActress.update();
+    this.mHero.update(this.mAllPlatforms);
+    this.mCatherine.update();
     this.mAllHumans.update();
-    this.mFlower.update(this.mActress.getXform().getPosition());
+    this.mFlower.update(this.mCatherine.getXform().getPosition());
 
     // create particles
     if (gEngine.Input.isKeyPressed(gEngine.Input.keys.Z)) {
@@ -205,7 +207,7 @@ Level1.prototype.update = function () {
     }
         
     
-    this.mActress.chaseHero(this.mHero, 40, 0.5);
+    this.mCatherine.chaseHero(this.mHero, 40, 0.5);
     for(var i = 0; i < this.mAllHumans.size(); i++) {
         this.mAllHumans.getObjectAt(i).chaseHero(this.mHero, 40, 0.3);
     }
@@ -266,7 +268,7 @@ Level1.prototype.getHumanChaseResult = function() {
 };
 
 Level1.prototype.getActressChaseResult = function() {
-    return this.mActress.getCatchHeroResult();
+    return this.mCatherine.getCatchHeroResult();
 };
 
 Level1.prototype.getTouchCatherineResult = function() {
