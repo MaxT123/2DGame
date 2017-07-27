@@ -17,7 +17,11 @@ function Level1() {
 gEngine.Core.inheritPrototype(Level1, MyGame);
 
 Level1.prototype.initialize0 = function () {
-    this.thisLevel = new Level2();
+    this.thisLevel = new Level1();
     this.nextLevel = new MyGame(); 
     this.sceneParser = new SceneFileParser(this.sceneFile);    
+};
+
+Level1.prototype.showAnimationWin = function(){
+    return true;
 };

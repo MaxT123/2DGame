@@ -33,7 +33,7 @@ Flower.prototype.update = function (posCather)
 {
     var xform = this.mFlower.getXform();
     var leftBorder = xform.getXPos() - xform.getWidth() / 2;
-    var rightBorder = xform.getXPos() - xform.getWidth() / 2;
+    var rightBorder = xform.getXPos() + xform.getWidth() / 2;
     var topBorder = xform.getYPos() + xform.getHeight() / 2;
     var bottomBorder = xform.getYPos() - xform.getHeight() / 2;
     if (leftBorder <= posCather[0] && posCather[0] <= rightBorder)

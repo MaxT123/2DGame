@@ -31,7 +31,7 @@ function Hero(spriteTexture, atX, atY, width, height, moveSpeed, jumpSpeed) {
     var r = new RigidRectangle(this.getXform(), this.mDye.getXform().getWidth(), this.mDye.getXform().getHeight());
     r.setMass(0.5);  // less dense than Minions
     r.setRestitution(0.3);
-    r.setColor([0, 1, 0, 0]);
+    r.setColor([0, 1, 0, 1]);
     r.setDrawBounds(true);
     this.setPhysicsComponent(r);
 }

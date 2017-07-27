@@ -61,6 +61,20 @@
             "Position": [70, 100],
             "Color": [0.9, 0.9, 0.9, 1.0],
             "Height": 5
+        },
+        
+        {
+            "Content": "Play Game",
+            "Position": [30, 53],
+            "Color": [0.9, 0.9, 0.9, 1.0],
+            "Height": 10
+        },
+        
+        {
+            "Content": "[Press 'Space' to continue]",
+            "Position": [27, 40],
+            "Color": [0.9, 0.9, 0.9, 1.0],
+            "Height": 5
         }
     ],
     

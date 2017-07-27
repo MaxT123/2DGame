@@ -25,6 +25,7 @@ function MyGame() {
     this.mHero = null;
     this.mCatherine = null;   
     this.mFlower = null;
+    this.mHeart = null;
     this.mGameStatus = 0;
 
     this.nextLevel = null;
@@ -46,6 +47,7 @@ MyGame.prototype.loadScene = function () {
     this.kHuman = "assets/Human.png";
     this.kFlower = "assets/flower.png";
     this.kFontCon72 = "assets/fonts/Consolas-72";
+    this.kHeart = "assets/Heart.png";
     
     this.sceneParser = null;
     this.mCameras = [];
@@ -66,6 +68,7 @@ MyGame.prototype.loadScene = function () {
     gEngine.Textures.loadTexture(this.kCatherine);
     gEngine.Textures.loadTexture(this.kHuman);
     gEngine.Textures.loadTexture(this.kFlower);
+    gEngine.Textures.loadTexture(this.kHeart);
     gEngine.Fonts.loadFont(this.kFontCon72);
 };
 
@@ -95,6 +98,10 @@ MyGame.prototype.initialize = function () {
     this.setTexts();
     //  Status
     this.setStatus();
+    
+    this.mHeart = new Heart(this.kHeart, 50, 50, 5, 5);
+    //var mCameraColor = this.mCamera.getBackgroundColor();
+    //this.mHeart.setColor(mCameraColor);
 };
 MyGame.prototype.setCameras = function() {
     this.mCameras = this.sceneParser.getCameras(this.mCameras);
@@ -189,6 +196,7 @@ MyGame.prototype.draw = function () {
     this.mHero.draw(this.mCamera);
     this.mCatherine.draw(this.mCamera);
     this.mFlower.draw(this.mCamera);
+    this.mHeart.draw(this.mCamera);
 };
 
 MyGame.prototype.update = function () {
@@ -197,6 +205,9 @@ MyGame.prototype.update = function () {
     this.mAllWalls.update();    
     this.mAllPlatforms.update();
     //playing
+    
+    //this.showAnimationWin();
+    
     if (this.mGameStatus === 0) {
         this.showFirstTxt();
         
@@ -219,15 +230,49 @@ MyGame.prototype.update = function () {
     this.physicsSimulation();
     // win/lose
     if (this.mGameStatus === 1) {
-        //if (this.showAnimationLose())
-        this.nextLevel = this.thisLevel;
-        gEngine.GameLoop.stop();
+        if (this.showAnimationLose())
+        {
+            this.nextLevel = this.thisLevel;
+            gEngine.GameLoop.stop();
+        }
     }
     if (this.mGameStatus === 2) {
-        //if (this.showSecondTxt() < -1){
+        if (this.showAnimationWin()){
             gEngine.GameLoop.stop();
-       // }
+        }
     }
+};
+
+MyGame.prototype.showAnimationWin = function(){
+    var delta =0.01;
+    var color1 = this.mTexts.getObjectAt(1).getColor();
+    var color2 = this.mTexts.getObjectAt(2).getColor();
+    
+    this.mHeart.update(this.mCatherine.getXform());
+    if (color1[3] > 0)
+    {
+        color1[3] -= delta;
+        this.mTexts.getObjectAt(1).setColor(color1);
+    }
+    else if (color2[3] > 0)
+    {
+        color2[3] -= delta;
+        this.mTexts.getObjectAt(2).setColor(color2);
+        this.mTexts.getObjectAt(3).setColor(color2);
+    }
+    else if (gEngine.Input.isKeyClicked(gEngine.Input.keys.Space))
+        return true;
+    
+    return false;
+};
+
+MyGame.prototype.showAnimationLose = function(){
+    var delta =0.02;
+    var mIntensity = gEngine.DefaultResources.getGlobalAmbientIntensity();
+    mIntensity -= delta;
+    gEngine.DefaultResources.setGlobalAmbientIntensity(mIntensity);
+    
+    return mIntensity <= 0;
 };
 
 MyGame.prototype.showFirstTxt = function() {
@@ -240,17 +285,6 @@ MyGame.prototype.showFirstTxt = function() {
     if(color1[3] >= 0) {
         this.mTexts.getObjectAt(0).setColor(color1);
     }
-};
-MyGame.prototype.showSecondTxt = function() {
-    if(this.mTexts.size() === 0) {
-        return;
-    }
-    var delta = 0.01;
-    var color2 = this.mTexts.getObjectAt(1).getColor();
-    color2[3] -= delta;
-    if(color2[3] >= 0)
-        this.mTexts.getObjectAt(1).setColor(color2);
-    return color2[3];
 };
 
 MyGame.prototype.gameResultDetecting = function () {

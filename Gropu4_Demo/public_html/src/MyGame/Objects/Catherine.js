@@ -22,7 +22,7 @@ function Catherine(spriteTexture, xPos, yPos, width, height, chaseSpeed, trigger
     var r = new RigidRectangle(this.getXform(), this.mActress.getXform().getWidth(), this.mActress.getXform().getHeight());
     r.setMass(0.5);  // less dense than Minions
     r.setRestitution(0.3);
-    r.setColor([0, 1, 0, 0]);
+    r.setColor([0, 1, 0, 1]);
     r.setDrawBounds(true);
     this.setPhysicsComponent(r);
 }
@@ -34,9 +34,9 @@ Catherine.prototype.chaseHero = function (hero) {
     var thisPos = this.getXform().getPosition();
     var distance = Math.sqrt((Math.pow((heroPos[0] - thisPos[0]), 2) + Math.pow((heroPos[1] - thisPos[1]), 2)));
 
-    if(distance <= this.triggerDis && distance > 5) {
+    if(distance <= this.triggerDis && distance > this.getXform().getWidth()) {
         this.moveTowards_H(hero, this.chaseSpeed);
-    } else if (distance <= 5) {
+    } else if (distance <= this.getXform().getWidth()) {
         this.ifCatchHero = true;
     }
 };
