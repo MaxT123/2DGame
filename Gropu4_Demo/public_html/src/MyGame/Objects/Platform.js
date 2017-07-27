@@ -9,22 +9,19 @@
 
 "use strict";  // Operate in Strict mode such that variables must be declared before used!
 
-
 function Platform(texture, atX, atY) {
-
-function Platform(texture, atX, atY, width, height, collider) {
     this.mPlatform = new TextureRenderable(texture);
 //    alert(this.mHero);
     this.mPlatform.setColor([1, 1, 1, 0]);
     this.mPlatform.getXform().setPosition(atX, atY);
-    this.mPlatform.getXform().setSize(width, height);
+    this.mPlatform.getXform().setSize(30, 3.75);
                                 // show each element for mAnimSpeed updates
     GameObject.call(this, this.mPlatform);
 
-    var rigidShape = new RigidRectangle(this.getXform(), width, height);
+    var rigidShape = new RigidRectangle(this.getXform(), 30, 3);
     rigidShape.setMass(0);  // ensures no movements!
     rigidShape.setDrawBounds(true);
-    rigidShape.setColor([1, 0.2, 0.2, 1]);
+    rigidShape.setColor([1, 0.2, 0.2, 0]);
     this.setPhysicsComponent(rigidShape);
 }
 gEngine.Core.inheritPrototype(Platform, GameObject);
