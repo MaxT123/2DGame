@@ -9,7 +9,14 @@
 
 "use strict";  // Operate in Strict mode such that variables must be declared before used!
 
+<<<<<<< HEAD
 function Platform(texture, atX, atY) {
+=======
+
+function Platform(texture, atX, atY) {
+
+function Platform(texture, atX, atY, width, height, collider) {
+>>>>>>> ac41942d15854849565fa4819166cf390c5b251c
     this.mPlatform = new TextureRenderable(texture);
 //    alert(this.mHero);
     this.mPlatform.setColor([1, 1, 1, 0]);

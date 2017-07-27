@@ -6,6 +6,7 @@
             <file>file:/C:/Users/Kelvin/Desktop/GitHub/html5engine/BookChapters/Chapter9/9.4.ParticleEmitters/public_html/src/Engine/Core/Engine_Physics.js</file>
         </group>
         <group>
+<<<<<<< HEAD
             <file>file:/C:/Users/Administrator/Documents/GitHub/2DGame/Gropu4_Demo/public_html/src/MyGame/Objects/Wall.js</file>
             <file>file:/C:/Users/Administrator/Documents/GitHub/2DGame/Gropu4_Demo/public_html/src/MyGame/Level2.js</file>
             <file>file:/C:/Users/Administrator/Documents/GitHub/2DGame/Gropu4_Demo/public_html/src/Engine/GameObjects/GameObjectSet.js</file>
@@ -16,6 +17,9 @@
             <file>file:/C:/Users/Administrator/Documents/GitHub/2DGame/Gropu4_Demo/public_html/src/MyGame/Objects/Hero.js</file>
             <file>file:/C:/Users/Administrator/Documents/GitHub/2DGame/Gropu4_Demo/public_html/src/Engine/Core/Resources/Engine_DefaultResources.js</file>
             <file>file:/C:/Users/Administrator/Documents/GitHub/2DGame/Gropu4_Demo/public_html/src/MyGame/Objects/Platform.js</file>
+=======
+            <file>file:/G:/Users/Documents/GitHub/2DGame/Gropu4_Demo/public_html/src/MyGame/MyGame.js</file>
+>>>>>>> ac41942d15854849565fa4819166cf390c5b251c
         </group>
     </open-files>
 </project-private>
