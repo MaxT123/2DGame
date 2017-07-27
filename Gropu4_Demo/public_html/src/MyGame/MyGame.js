@@ -12,18 +12,7 @@
 "use strict";  // Operate in Strict mode such that variables must be declared before used!
 
 function MyGame() {
-<<<<<<< HEAD
-    this.sceneFile_Level0 = "assets/Scenes/Level0.json";
-    this.kPlatformTexture = "assets/Ground.png";
-    this.kWallTexture = "assets/wall.png";
-    this.kHeroSprite = "assets/Me.png";
-    this.kCatherine = "assets/Catherine.png";
-    this.kHuman = "assets/Human.png";
-    this.kFlower = "assets/flower.png";
-    this.kFontCon72 = "assets/fonts/Consolas-72";
-=======
     this.sceneFile = "assets/Scenes/Level0.json";
->>>>>>> master
 
     this.sceneParser = null;
     this.mCameras = [];
@@ -50,11 +39,6 @@ function MyGame() {
 gEngine.Core.inheritPrototype(MyGame, Scene);
 
 MyGame.prototype.loadScene = function () {
-<<<<<<< HEAD
-    
-    gEngine.TextFileLoader.loadTextFile(this.sceneFile_Level0, gEngine.TextFileLoader.eTextFileType.eJsonFile);
- 
-=======
     this.kPlatformTexture = "assets/Ground.png";
     this.kWallTexture = "assets/wall.png";
     this.kHeroSprite = "assets/Me.png";
@@ -76,7 +60,6 @@ MyGame.prototype.loadScene = function () {
     this.mAllWalls = new GameObjectSet();
     
     gEngine.TextFileLoader.loadTextFile(this.sceneFile, gEngine.TextFileLoader.eTextFileType.eJsonFile);
->>>>>>> master
     gEngine.Textures.loadTexture(this.kPlatformTexture);
     gEngine.Textures.loadTexture(this.kWallTexture);
     gEngine.Textures.loadTexture(this.kHeroSprite);
@@ -87,19 +70,6 @@ MyGame.prototype.loadScene = function () {
 };
 
 MyGame.prototype.unloadScene = function () { 
-<<<<<<< HEAD
-
-    gEngine.Core.startScene(this.nextLevel);
-};
-
-MyGame.prototype.initialize = function () {
-    this.nextLevel = new Level1(); 
-    this.sceneParser = new SceneFileParser(this.sceneFile_Level0);
-    gEngine.DefaultResources.setGlobalAmbientIntensity(3);
-    //  set up some objects..
-    //  NextLevel
-    this.setNextLevel();
-=======
     gEngine.Core.startScene(this.nextLevel);
 };
 MyGame.prototype.initialize0 = function () {
@@ -111,7 +81,6 @@ MyGame.prototype.initialize0 = function () {
 MyGame.prototype.initialize = function () {
     this.initialize0();
     gEngine.DefaultResources.setGlobalAmbientIntensity(3);
->>>>>>> master
     //  Cameras
     this.setCameras();
     //  Characters
@@ -177,14 +146,6 @@ MyGame.prototype.setStatus = function() {
 };
 MyGame.prototype.setTexts = function() {
     this.mTextAttrs = this.sceneParser.getTexts(this.mTextAttrs);
-<<<<<<< HEAD
-    for(var i = 0; i < this.mTextAttrs.length; i++) {
-        var textAttr = this.mTextAttrs[i];
-        var text = new FontRenderable(textAttr[0]);
-        text.setFont(this.kFontCon72);
-        this.setText(text, textAttr[1], textAttr[2], textAttr[3], textAttr[4]);
-        this.mTexts.addToSet(text);
-=======
     if(this.mTextAttrs !== null) {
          for(var i = 0; i < this.mTextAttrs.length; i++) {
             var textAttr = this.mTextAttrs[i];
@@ -193,16 +154,12 @@ MyGame.prototype.setTexts = function() {
             this.setText(text, textAttr[1], textAttr[2], textAttr[3], textAttr[4]);
             this.mTexts.addToSet(text);
         }
->>>>>>> master
     }
 };
 MyGame.prototype.setText = function (font, posX, posY, color, textH) {
     font.setColor(color);
     font.getXform().setPosition(posX, posY);
     font.setTextHeight(textH);
-};
-MyGame.prototype.setNextLevel = function () {
-    this.nextLevel = new Level1();
 };
 
 MyGame.prototype.physicsSimulation = function() {
@@ -267,24 +224,16 @@ MyGame.prototype.update = function () {
         gEngine.GameLoop.stop();
     }
     if (this.mGameStatus === 2) {
-<<<<<<< HEAD
-        if (this.showSecondTxt() < -1){
-            this.nextLevel = new Level1();
-=======
         //if (this.showSecondTxt() < -1){
->>>>>>> master
             gEngine.GameLoop.stop();
        // }
     }
 };
 
 MyGame.prototype.showFirstTxt = function() {
-<<<<<<< HEAD
-=======
     if(this.mTexts.size() === 0) {
         return;
     }
->>>>>>> master
     var delta = 0.01;
     var color1 = this.mTexts.getObjectAt(0).getColor();
     color1[3] -= delta;
@@ -293,12 +242,9 @@ MyGame.prototype.showFirstTxt = function() {
     }
 };
 MyGame.prototype.showSecondTxt = function() {
-<<<<<<< HEAD
-=======
     if(this.mTexts.size() === 0) {
         return;
     }
->>>>>>> master
     var delta = 0.01;
     var color2 = this.mTexts.getObjectAt(1).getColor();
     color2[3] -= delta;
@@ -308,13 +254,9 @@ MyGame.prototype.showSecondTxt = function() {
 };
 
 MyGame.prototype.gameResultDetecting = function () {
-<<<<<<< HEAD
-    if(this.mAllHumans.getHumanChaseResult() || this.mCatherine.getCatchHeroResult()) {
-=======
     if(this.mAllHumans.getHumanChaseResult() 
             || this.mCatherine.getCatchHeroResult()
             || this.mCatherine.getFallingResult()) {
->>>>>>> master
         this.mGameStatus = 1;
     }
     if (this.mFlower.getTouchCatherineResult()) {

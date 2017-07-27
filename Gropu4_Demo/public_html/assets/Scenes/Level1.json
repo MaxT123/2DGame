@@ -62,11 +62,11 @@
     "Walls": [
         {
             "Position": [0, 30],
-            "Scale": [1, 130]
+            "Scale": [1, 170]
         },
         {
             "Position": [200, 30],
-            "Scale": [1, 130]
+            "Scale": [1, 170]
         }
     ],
     
