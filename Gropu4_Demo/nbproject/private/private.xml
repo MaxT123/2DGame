@@ -7,6 +7,7 @@
         </group>
         <group>
 <<<<<<< HEAD
+<<<<<<< HEAD
             <file>file:/C:/Users/Administrator/Documents/GitHub/2DGame/Gropu4_Demo/public_html/src/MyGame/Objects/Wall.js</file>
             <file>file:/C:/Users/Administrator/Documents/GitHub/2DGame/Gropu4_Demo/public_html/src/MyGame/Level2.js</file>
             <file>file:/C:/Users/Administrator/Documents/GitHub/2DGame/Gropu4_Demo/public_html/src/Engine/GameObjects/GameObjectSet.js</file>
@@ -20,6 +21,9 @@
 =======
             <file>file:/G:/Users/Documents/GitHub/2DGame/Gropu4_Demo/public_html/src/MyGame/MyGame.js</file>
 >>>>>>> ac41942d15854849565fa4819166cf390c5b251c
+=======
+            <file>file:/G:/Users/Documents/GitHub/2DGame/Gropu4_Demo/public_html/src/MyGame/MyGame.js</file>
+>>>>>>> e5a261f92045a9cc8956104ec861b513e9afad36
         </group>
     </open-files>
 </project-private>
