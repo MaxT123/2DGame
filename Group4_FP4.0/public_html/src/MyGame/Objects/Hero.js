@@ -32,7 +32,7 @@ function Hero(spriteTexture, atX, atY, width, height, moveSpeed, jumpSpeed) {
     r.setMass(0.5);  // less dense than Minions
     r.setRestitution(0.3);
     r.setColor([0, 1, 0, 1]);
-    r.setDrawBounds(true);
+    r.setDrawBounds(false);
     this.setPhysicsComponent(r);
 }
 gEngine.Core.inheritPrototype(Hero, GameObject);
@@ -90,4 +90,8 @@ Hero.prototype.update = function (platforms) {
                 this.isGrounded = false;
         }
     }
+};
+
+Hero.prototype.getFallingResult = function() {
+    return this.getXform().getYPos() < 0;
 };

@@ -46,3 +46,7 @@ Heart.prototype.update = function (xform)
     this.mHeart.setColor(mColor);
 };
 
+Heart.prototype.getUpdateResult = function (){
+    //alert(this.mHeart.getColor()[3]);
+    return this.mHeart.getColor()[3] < 0;
+};

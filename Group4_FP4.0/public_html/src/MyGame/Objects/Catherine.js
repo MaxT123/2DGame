@@ -23,7 +23,7 @@ function Catherine(spriteTexture, xPos, yPos, width, height, chaseSpeed, trigger
     r.setMass(0.5);  // less dense than Minions
     r.setRestitution(0.3);
     r.setColor([0, 1, 0, 1]);
-    r.setDrawBounds(true);
+    r.setDrawBounds(false);
     this.setPhysicsComponent(r);
 }
 

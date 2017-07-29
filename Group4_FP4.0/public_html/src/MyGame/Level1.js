@@ -18,10 +18,22 @@ gEngine.Core.inheritPrototype(Level1, MyGame);
 
 Level1.prototype.initialize0 = function () {
     this.thisLevel = new Level1();
-    this.nextLevel = new MyGame(); 
+    this.nextLevel = new Level2(); 
     this.sceneParser = new SceneFileParser(this.sceneFile);    
 };
 
 Level1.prototype.showAnimationWin = function(){
-    return true;
+    var delta =0.01;
+    var color1 = this.mTexts.getObjectAt(1).getColor();
+    
+    this.mHeart.update(this.mCatherine.getXform());
+    if (color1[3] > 0){
+        color1[3] -= delta;
+        this.mTexts.getObjectAt(1).setColor(color1);
+    }
+    else {
+        return true;
+    }
+    
+    return false;
 };

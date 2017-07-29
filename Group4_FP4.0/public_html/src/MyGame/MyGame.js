@@ -73,6 +73,7 @@ MyGame.prototype.loadScene = function () {
 };
 
 MyGame.prototype.unloadScene = function () { 
+    gEngine.TextFileLoader.unloadTextFile(this.sceneFile);
     gEngine.Core.startScene(this.nextLevel);
 };
 MyGame.prototype.initialize0 = function () {
@@ -99,7 +100,7 @@ MyGame.prototype.initialize = function () {
     //  Status
     this.setStatus();
     
-    this.mHeart = new Heart(this.kHeart, 50, 50, 5, 5);
+    this.mHeart = new Heart(this.kHeart, -50, -50, 5, 5);
     //var mCameraColor = this.mCamera.getBackgroundColor();
     //this.mHeart.setColor(mCameraColor);
 };
@@ -206,6 +207,7 @@ MyGame.prototype.update = function () {
     this.mAllPlatforms.update();
     //playing
     
+    //debug
     //this.showAnimationWin();
     
     if (this.mGameStatus === 0) {
@@ -247,8 +249,17 @@ MyGame.prototype.showAnimationWin = function(){
     var delta =0.01;
     var color1 = this.mTexts.getObjectAt(1).getColor();
     var color2 = this.mTexts.getObjectAt(2).getColor();
+    var color4 = this.mTexts.getObjectAt(4).getColor();
     
     this.mHeart.update(this.mCatherine.getXform());
+    if (color4[3] < 1)
+    {
+        color4[3] += delta/2;
+        this.mTexts.getObjectAt(4).setColor(color4);
+        this.mTexts.getObjectAt(5).setColor(color4);
+        this.mTexts.getObjectAt(6).setColor(color4);
+    }
+    
     if (color1[3] > 0)
     {
         color1[3] -= delta;
@@ -279,7 +290,7 @@ MyGame.prototype.showFirstTxt = function() {
     if(this.mTexts.size() === 0) {
         return;
     }
-    var delta = 0.01;
+    var delta = 0.005;
     var color1 = this.mTexts.getObjectAt(0).getColor();
     color1[3] -= delta;
     if(color1[3] >= 0) {
@@ -290,7 +301,8 @@ MyGame.prototype.showFirstTxt = function() {
 MyGame.prototype.gameResultDetecting = function () {
     if(this.mAllHumans.getHumanChaseResult() 
             || this.mCatherine.getCatchHeroResult()
-            || this.mCatherine.getFallingResult()) {
+            || this.mCatherine.getFallingResult()
+            || this.mHero.getFallingResult()) {
         this.mGameStatus = 1;
     }
     if (this.mFlower.getTouchCatherineResult()) {
